@@ -1,11 +1,15 @@
 /**
- * Generates the hero placeholder — a deliberate, abstract "surveillance
- * frame" graphic rather than a fake photo:
+ * Generates the hero placeholder — a bright, cinematic "surveillance lens"
+ * composition designed to read clearly against the dark hero section:
  *
- *   · deep navy field with a cool key light from the upper right
- *   · a large camera-lens geometry (concentric rings + iris blades)
- *   · a faint perspective grid suggesting a facade
- *   · scan-line sweep and film grain
+ *   · luminous blue-white core with a strong flare
+ *   · concentric lens rings that stay visible on a dark page
+ *   · a bright diagonal light sweep across the frame
+ *   · a pale horizon glow at the bottom
+ *   · perspective grid lines catching the light
+ *
+ * The overall image is intentionally LIGHT so it separates from the navy
+ * hero background.
  *
  * Usage: node scripts/generate-hero.mjs
  */
@@ -80,145 +84,156 @@ const clamp255 = (v) => Math.max(0, Math.min(255, v));
 
 /* ---------- The scene -------------------------------------------------- */
 function scene(w, h) {
-  // Lens geometry, positioned upper-centre-right.
-  const lx = w * 0.58;
-  const ly = h * 0.36;
-  const rOuter = w * 0.36;
-  const rMid = w * 0.255;
-  const rInner = w * 0.15;
-  const rCore = w * 0.052;
+  // Lens geometry.
+  const lx = w * 0.5;
+  const ly = h * 0.42;
+  const rOuter = w * 0.44;
+  const rMid = w * 0.33;
+  const rInner = w * 0.21;
+  const rCore = w * 0.105;
 
-  // Facade grid, converging toward a vanishing point upper-right.
-  const vpx = w * 1.15;
-  const vpy = h * 0.22;
+  // Light sweep angle.
+  const sweepAngle = -0.62;
+  const cosA = Math.cos(sweepAngle);
+  const sinA = Math.sin(sweepAngle);
 
   return (px, py) => {
     const u = px / w;
     const v = py / h;
 
-    /* --- Base field ------------------------------------------------- */
-    let r = 9;
-    let g = 13;
-    let b = 26;
+    /* --- Base: deep blue-black, but not pure black ------------------- */
+    let r = 16;
+    let g = 28;
+    let b = 56;
 
-    /* --- Cool key light, upper right --------------------------------- */
-    const key = Math.max(0, 1 - Math.hypot(u - 0.82, v - 0.16) * 1.55) ** 2.1;
-    r += key * 26;
-    g += key * 52;
-    b += key * 104;
+    /* --- Large soft light source behind the lens --------------------- */
+    const key = Math.max(0, 1 - Math.hypot(u - 0.5, v - 0.42) * 1.15) ** 1.7;
+    r += key * 34;
+    g += key * 66;
+    b += key * 132;
 
-    /* --- Warm bounce, lower left ------------------------------------- */
-    const warm = Math.max(0, 1 - Math.hypot(u - 0.12, v - 0.92) * 2.0) ** 2.6;
-    r += warm * 52;
-    g += warm * 30;
-    b += warm * 12;
+    /* --- Diagonal light sweep across the frame ------------------------ */
+    const sweepCoord = (u - 0.5) * cosA + (v - 0.5) * sinA;
+    const sweep = Math.exp(-Math.pow(sweepCoord / 0.30, 2));
+    r += sweep * 46;
+    g += sweep * 92;
+    b += sweep * 176;
 
-    /* --- Perspective facade grid ------------------------------------- */
+    /* --- Pale horizon glow at the bottom ------------------------------ */
+    const horizon = smoothstep(0.55, 1.0, v);
+    r += horizon * 58;
+    g += horizon * 96;
+    b += horizon * 132;
+
+    /* --- Perspective grid catching the light ------------------------- */
+    const vpx = w * 1.2;
+    const vpy = h * 0.3;
+
     // Horizontal lines converging to the vanishing point.
-    for (let i = 0; i < 16; i++) {
-      const t = i / 16;
-      const y0 = h * (0.2 + t * 1.25);
-      const yv = vpy;
-      const xAt = (x) => lerp(x0, vpx, 1 - x / w);
-      // line from (0, y0) to (vpx, yv)
-      const lineY = (x) => lerp(y0, yv, Math.min(1, x / vpx));
+    for (let i = 0; i < 14; i++) {
+      const y0 = h * (0.14 + (i / 14) * 1.3);
+      const lineY = (x) => lerp(y0, vpy, Math.min(1, x / vpx));
       const d = Math.abs(py - lineY(px));
-      const fade = smoothstep(0.0, 0.55, u) * (1 - smoothstep(0.85, 1.0, u));
-      if (d < 1.6 && fade > 0.02) {
-        const a = (1 - d / 1.6) * 0.16 * fade;
-        r += a * 90;
-        g += a * 130;
-        b += a * 200;
+      const fade = smoothstep(0.0, 0.5, u) * (1 - smoothstep(0.8, 1.0, u));
+      if (d < 1.8 && fade > 0.02) {
+        const a = (1 - d / 1.8) * 0.3 * fade;
+        r += a * 110;
+        g += a * 165;
+        b += a * 235;
       }
     }
 
     // Vertical lines converging to the vanishing point.
-    for (let i = 0; i < 9; i++) {
-      const x0 = (i / 9) * w * 1.25 - w * 0.1;
+    for (let i = 0; i < 8; i++) {
+      const x0 = (i / 8) * w * 1.3 - w * 0.12;
       const lineX = (y) => lerp(x0, vpx, Math.min(1, y / h));
       const d = Math.abs(px - lineX(py));
-      const fade = smoothstep(0.05, 0.5, v);
-      if (d < 1.5 && fade > 0.02) {
-        const a = (1 - d / 1.5) * 0.11 * fade;
-        r += a * 80;
-        g += a * 120;
-        b += a * 190;
+      const fade = smoothstep(0.02, 0.45, v);
+      if (d < 1.6 && fade > 0.02) {
+        const a = (1 - d / 1.6) * 0.22 * fade;
+        r += a * 100;
+        g += a * 150;
+        b += a * 220;
       }
     }
 
-    /* --- Lens rings -------------------------------------------------- */
+    /* --- Lens rings (bright, so they read on a dark page) ------------- */
     const d = Math.hypot(px - lx, py - ly);
+
     const ring = (radius, width, strength) => {
       const dr = Math.abs(d - radius);
-      if (dr < width) {
-        const a = (1 - dr / width) * strength;
-        return a;
-      }
-      return 0;
+      return dr < width ? (1 - dr / width) * strength : 0;
     };
 
-    const ringA = ring(rOuter, 2.4, 0.3);
-    const ringB = ring(rMid, 2.0, 0.22);
-    const ringC = ring(rInner, 5.0, 0.16);
+    const ringA = ring(rOuter, 3.2, 0.55);
+    const ringB = ring(rMid, 2.6, 0.45);
+    const ringC = ring(rInner, 6.0, 0.32);
 
-    r += ringA * 110 + ringB * 80 + ringC * 70;
-    g += ringA * 150 + ringB * 120 + ringC * 105;
-    b += ringA * 230 + ringB * 200 + ringC * 185;
+    r += ringA * 130 + ringB * 120 + ringC * 105;
+    g += ringA * 180 + ringB * 170 + ringC * 150;
+    b += ringA * 255 + ringB * 250 + ringC * 235;
 
-    /* --- Iris blades ------------------------------------------------- */
-    // Eight blades forming an aperture around the core.
+    /* --- Iris blades -------------------------------------------------- */
     const ang = Math.atan2(py - ly, px - lx);
-    const blades = 8;
+    const blades = 9;
     const aNorm = ((ang / (Math.PI * 2)) * blades + 0.5) % 1;
-    const bladeEdge = Math.abs(aNorm - 0.5) * 2; // 0 at centre, 1 at edge
-    const bladeR = rInner * (0.42 + bladeEdge * 0.58);
-    const inBlade = d < bladeR && d > rCore * 0.9;
-    if (inBlade) {
+    const bladeEdge = Math.abs(aNorm - 0.5) * 2;
+    const bladeR = rInner * (0.45 + bladeEdge * 0.55);
+    if (d < bladeR && d > rCore * 0.85) {
       const edge = Math.abs(d - bladeR);
-      if (edge < 2.0) {
-        const a = (1 - edge / 2.0) * 0.34;
+      if (edge < 2.4) {
+        const a = (1 - edge / 2.4) * 0.5;
+        r += a * 130;
+        g += a * 190;
+        b += a * 250;
+      }
+    }
+
+    /* --- Luminous core ------------------------------------------------ */
+    const coreT = 1 - smoothstep(0, rCore, d);
+    r = lerp(r, 236, coreT * 0.92);
+    g = lerp(g, 246, coreT * 0.92);
+    b = lerp(b, 255, coreT * 0.92);
+
+    /* --- Flare halo around the core ----------------------------------- */
+    const halo = Math.max(0, 1 - d / (rCore * 4.2)) ** 2.2;
+    r += halo * 70;
+    g += halo * 130;
+    b += halo * 215;
+
+    /* --- Anamorphic streak through the core -------------------------- */
+    const streak =
+      Math.exp(-Math.pow((py - ly) / (h * 0.009), 2)) *
+      Math.max(0, 1 - Math.abs(px - lx) / (w * 0.46));
+    r += streak * 100;
+    g += streak * 170;
+    b += streak * 235;
+
+    /* --- Small sparkle artefacts (lens flare) ------------------------- */
+    for (const [fx, fy, fr, fs] of [
+      [0.72, 0.24, 0.035, 0.5],
+      [0.26, 0.62, 0.022, 0.36],
+      [0.63, 0.72, 0.016, 0.3],
+    ]) {
+      const dd = Math.hypot(u - fx, v - fy) / fr;
+      if (dd < 1) {
+        const a = (1 - dd) ** 2.2 * fs;
         r += a * 120;
-        g += a * 165;
+        g += a * 175;
         b += a * 240;
       }
     }
 
-    /* --- Core lens + blue glint -------------------------------------- */
-    if (d < rCore) {
-      const t = 1 - d / rCore;
-      r = lerp(r, 26, t * 0.8);
-      g = lerp(g, 74, t * 0.8);
-      b = lerp(b, 190, t * 0.8);
-    }
-    const glint = Math.max(0, 1 - d / (rCore * 3.4)) ** 2.6;
-    r += glint * 46;
-    g += glint * 92;
-    b += glint * 190;
-
-    /* --- Highlight streak across the lens ---------------------------- */
-    const streak = Math.exp(-Math.pow((py - ly) / (h * 0.012), 2)) *
-      Math.max(0, 1 - Math.abs(px - lx) / (w * 0.34));
-    r += streak * 70;
-    g += streak * 130;
-    b += streak * 210;
-
-    /* --- Scan line --------------------------------------------------- */
-    const scanY = (v * 3.1) % 1;
-    const scan = Math.exp(-Math.pow((scanY - 0.5) / 0.05, 2)) * 0.05;
-    r += scan * 60;
-    g += scan * 110;
-    b += scan * 180;
-
-    /* --- Vignette ----------------------------------------------------- */
+    /* --- Soft vignette (gentle — keeps the frame bright) --------------- */
     const cx = u - 0.5;
     const cy = v - 0.5;
-    const vig = 1 - Math.min(1, Math.hypot(cx, cy) * 1.5) * 0.55;
+    const vig = 1 - Math.min(1, Math.hypot(cx, cy) * 1.35) * 0.4;
     r *= vig;
     g *= vig;
     b *= vig;
 
     /* --- Grain -------------------------------------------------------- */
-    const n = (hash(px, py, 29) - 0.5) * 9;
+    const n = (hash(px, py, 29) - 0.5) * 7;
 
     return [
       clamp255(Math.round(r + n)),

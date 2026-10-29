@@ -127,8 +127,14 @@ export function Hero() {
           transition={{ duration: 1.1, ease: EASE.outExpo, delay: 0.25 }}
         >
           <div className="group relative">
+            {/* Ambient glow behind the frame — lifts it off the dark hero */}
+            <div
+              className="pointer-events-none absolute -inset-6 rounded-[2rem] bg-[radial-gradient(60%_60%_at_50%_45%,rgba(46,107,255,0.32),transparent_72%)] blur-2xl"
+              aria-hidden
+            />
+
             {/* Image frame */}
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-ink-900 shadow-deep sm:aspect-[4/4.4] lg:aspect-[3/4] xl:aspect-[4/4.2]">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-navy-900 shadow-[0_40px_100px_-30px_rgba(46,107,255,0.45)] ring-1 ring-inset ring-white/12 sm:aspect-[4/4.4] lg:aspect-[3/4] xl:aspect-[4/4.2]">
               <motion.div
                 className="absolute inset-0"
                 initial={reduce ? false : { scale: 1.1 }}
@@ -137,7 +143,7 @@ export function Hero() {
               >
                 <Image
                   src="/images/hero/cctv-hero.jpg"
-                  alt="Professional CCTV camera overlooking a modern building facade"
+                  alt="Close-up of a CCTV camera lens with a luminous blue iris"
                   fill
                   priority
                   quality={90}
@@ -146,19 +152,19 @@ export function Hero() {
                 />
               </motion.div>
 
-              {/* Cinematic grade */}
+              {/* Cinematic grade — kept light so the artwork stays visible */}
               <div
-                className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-950/15 to-transparent"
+                className="absolute inset-0 bg-gradient-to-t from-navy-950/45 via-transparent to-transparent"
                 aria-hidden
               />
               <div
-                className="absolute inset-0 bg-gradient-to-br from-navy-950/45 via-transparent to-electric-500/10"
+                className="absolute inset-0 bg-gradient-to-br from-navy-950/20 via-transparent to-transparent"
                 aria-hidden
               />
 
               {/* Corner bracket detail */}
               <div
-                className="pointer-events-none absolute inset-4 rounded border border-white/12"
+                className="pointer-events-none absolute inset-4 rounded border border-white/18"
                 aria-hidden
               />
             </div>
