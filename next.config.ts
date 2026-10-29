@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [360, 480, 640, 768, 1024, 1280, 1600, 1920, 2560],
     imageSizes: [64, 96, 128, 200, 256, 384],
+    /**
+     * Explicitly allow the quality values used across the site. Required
+     * from Next.js 16 — declaring them here keeps the build warning-free.
+     */
+    qualities: [70, 75, 80, 82, 84, 88, 90],
     remotePatterns: [
       {
         protocol: "https",
