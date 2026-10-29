@@ -1,0 +1,45 @@
+{
+  "name": "flash-fix-security",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "gen:images": "node scripts/generate-placeholders.mjs",
+    "gen:hero": "node scripts/generate-hero.mjs",
+    "gen:favicon": "node scripts/generate-favicon.mjs",
+    "audit:pages": "node scripts/audit.mjs",
+    "audit:a11y": "node scripts/a11y.mjs",
+    "shots": "node scripts/slice.mjs"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.9.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.15.0",
+    "lucide-react": "^0.469.0",
+    "next": "15.5.28",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-hook-form": "^7.54.2",
+    "tailwind-merge": "^2.6.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.7",
+    "@tailwindcss/forms": "^0.5.10",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.4",
+    "@types/react-dom": "^19.0.2",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.18.0",
+    "eslint-config-next": "15.5.28",
+    "playwright-core": "^1.49.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3"
+  },
+  "description": "Premium cinematic marketing website for Flash Fix Computers & Security Systems — CCTV installation, supply, repair and AMC in Hyderabad."
+}

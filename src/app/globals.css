@@ -1,0 +1,287 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Design tokens
+   ========================================================================== */
+:root {
+  --nav-h: 76px;
+
+  --c-void: #07090e;
+  --c-navy: #0a1020;
+  --c-ink: #12151b;
+  --c-paper: #ffffff;
+  --c-bone: #f5f3ef;
+
+  --c-electric: #2e6bff;
+  --c-whatsapp: #25d366;
+
+  --e-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --e-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+  --e-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  --t-fast: 250ms;
+  --t-base: 400ms;
+  --t-slow: 600ms;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --nav-h: 88px;
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@layer base {
+  * {
+    @apply border-ink-200;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ink-950 font-sans text-ink-800 antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    /* Reserve space so the floating contact control never covers content. */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink-950;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Focus — visible, high-contrast, consistent */
+  :focus-visible {
+    @apply outline-none ring-2 ring-electric-500 ring-offset-2 ring-offset-ink-950;
+  }
+
+  ::selection {
+    @apply bg-electric-500 text-white;
+  }
+
+  /* Scrollbar — subtle, dark-aware */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-ink-950;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-ink-700;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-ink-600;
+  }
+
+  /* Kill the iOS tap flash on dark surfaces */
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ==========================================================================
+   Components — reusable, cinematic primitives
+   ========================================================================== */
+@layer components {
+  /* --- Layout ---------------------------------------------------------- */
+  .shell {
+    @apply mx-auto w-full max-w-[1360px] px-5 sm:px-8 lg:px-12;
+  }
+
+  .shell-narrow {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8 lg:px-12;
+  }
+
+  /* --- Hairlines ------------------------------------------------------- */
+  .rule {
+    @apply h-px w-full bg-ink-950/10;
+  }
+  .rule-dark {
+    @apply h-px w-full bg-white/10;
+  }
+
+  /* --- Eyebrow / kicker ------------------------------------------------ */
+  .eyebrow {
+    @apply font-mono text-eyebrow uppercase text-ink-500;
+  }
+  .eyebrow-dark {
+    @apply font-mono text-eyebrow uppercase text-white/55;
+  }
+
+  /* --- Glass (used sparingly: nav + overlays only) --------------------- */
+  .glass {
+    @apply border border-white/10 bg-white/[0.06] backdrop-blur-xl;
+  }
+  .glass-light {
+    @apply border border-white/60 bg-white/70 backdrop-blur-xl;
+  }
+
+  /* --- Buttons --------------------------------------------------------- */
+  /* `.btn` is the shared base. Tailwind cannot @apply a custom class from
+     the same layer, so the base utilities are repeated in each variant via
+     the shared `--btn-base` list below. */
+  .btn,
+  .btn-primary,
+  .btn-electric,
+  .btn-ghost-dark,
+  .btn-outline,
+  .btn-whatsapp {
+    @apply inline-flex select-none items-center justify-center gap-2 whitespace-nowrap
+           rounded-full font-medium tracking-[-0.004em] transition-colors duration-250
+           disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn {
+    @apply px-6 py-3;
+  }
+
+  .btn-primary {
+    @apply bg-ink-950 px-6 py-3 text-white hover:bg-navy-700
+           shadow-[0_14px_36px_-16px_rgba(7,9,14,0.6)]
+           focus-visible:ring-offset-white;
+  }
+
+  .btn-electric {
+    @apply bg-electric-500 px-6 py-3 text-white hover:bg-electric-600
+           shadow-[0_14px_40px_-14px_rgba(46,107,255,0.85)]
+           focus-visible:ring-offset-ink-950;
+  }
+
+  .btn-ghost-dark {
+    @apply border border-white/20 bg-white/[0.04] px-6 py-3 text-white
+           backdrop-blur-md hover:border-white/40 hover:bg-white/[0.09]
+           focus-visible:ring-offset-ink-950;
+  }
+
+  .btn-outline {
+    @apply border border-ink-950/15 bg-transparent px-6 py-3 text-ink-950
+           hover:border-ink-950 hover:bg-ink-950 hover:text-white
+           focus-visible:ring-offset-white;
+  }
+
+  .btn-whatsapp {
+    @apply bg-signal-500 px-6 py-3 text-ink-950 hover:bg-signal-400
+           shadow-[0_14px_40px_-16px_rgba(37,211,102,0.7)]
+           focus-visible:ring-offset-ink-950;
+  }
+
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
+  }
+
+  /* --- Links ----------------------------------------------------------- */
+  .link-underline {
+    @apply relative inline-flex items-center gap-1.5 font-medium
+           after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full
+           after:origin-right after:scale-x-0 after:bg-current after:transition-transform
+           after:duration-300 after:ease-out-expo hover:after:origin-left hover:after:scale-x-100;
+  }
+
+  /* --- Media ----------------------------------------------------------- */
+  .media {
+    @apply relative overflow-hidden rounded-lg bg-ink-900;
+  }
+
+  .media img {
+    @apply h-full w-full object-cover;
+  }
+
+  .scrim-bottom {
+    background: linear-gradient(
+      to top,
+      rgba(7, 9, 14, 0.88) 0%,
+      rgba(7, 9, 14, 0.55) 32%,
+      rgba(7, 9, 14, 0.12) 62%,
+      rgba(7, 9, 14, 0) 100%
+    );
+  }
+
+  .scrim-full {
+    background: linear-gradient(
+      to right,
+      rgba(6, 10, 20, 0.92) 0%,
+      rgba(6, 10, 20, 0.72) 34%,
+      rgba(6, 10, 20, 0.38) 62%,
+      rgba(6, 10, 20, 0.2) 100%
+    );
+  }
+
+  /* --- Prose ----------------------------------------------------------- */
+  .lede {
+    @apply text-lede text-ink-600;
+  }
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .mask-fade-r {
+    mask-image: linear-gradient(to right, black 82%, transparent 100%);
+  }
+
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Soft pulse ring behind the floating WhatsApp icon */
+  [data-pulse] {
+    animation: pulse-ring 2.6s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  }
+}
+
+/* ==========================================================================
+   Reduced motion — respect the user, keep content visible
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
