@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { enquirySchema } from "@/lib/enquiry-schema";
 import { business } from "@/config/business";
+import { sendEnquiryEmail } from "@/lib/send-enquiry-email";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -12,9 +13,9 @@ export const dynamic = "force-dynamic";
  * real, verifiable submission — the client only shows a success state when
  * this route confirms persistence.
  *
- * For production, set `ENQUIRY_WEBHOOK_URL` to forward the enquiry to a CRM,
- * Google Sheet, email service, or any other sink. When the webhook is not
- * configured, the local file store is used and the enquiry is still real.
+ * Each enquiry is saved to `data/enquiries.json` and emailed to
+ * `ENQUIRY_NOTIFY_EMAIL` (default: `business.email`) when Gmail SMTP env vars
+ * are set. Optionally set `ENQUIRY_WEBHOOK_URL` for a CRM or Google Sheet.
  */
 export async function POST(request: Request) {
   let payload: unknown;
@@ -62,19 +63,16 @@ export async function POST(request: Request) {
       });
 
       if (!res.ok) {
-        // Persist locally as a fallback so the enquiry is never lost.
         await persistLocally(enquiry);
-        return NextResponse.json(
-          {
-            ok: true,
-            id: enquiry.id,
-            message: "Enquiry received and saved.",
-          },
-          { status: 201 }
-        );
       }
     } else {
       await persistLocally(enquiry);
+    }
+
+    try {
+      await sendEnquiryEmail(enquiry);
+    } catch (emailError) {
+      console.error("[enquiry] email notification failed:", emailError);
     }
 
     return NextResponse.json(

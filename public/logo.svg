@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="ff-ring" x1="6" y1="4" x2="42" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6B96FF" />
+      <stop offset="1" stop-color="#2E6BFF" />
+    </linearGradient>
+    <linearGradient id="ff-shine" x1="14" y1="10" x2="34" y2="38" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity="0.14" />
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="12" fill="#0A1020" />
+  <rect x="1" y="1" width="46" height="46" rx="11" stroke="url(#ff-ring)" stroke-width="1.25" opacity="0.9" />
+  <path d="M24 10.5 33.25 14.75v9.1c0 5.4-4.05 8.85-9.25 10.45-5.2-1.6-9.25-5.05-9.25-10.45v-9.1L24 10.5Z" stroke="#2E6BFF" stroke-width="1.65" fill="url(#ff-shine)" />
+  <circle cx="24" cy="23.25" r="7.25" stroke="#2E6BFF" stroke-width="1" opacity="0.5" />
+  <circle cx="24" cy="23.25" r="2.35" fill="#2E6BFF" />
+  <path
+    d="M18.25 16.1h9.1v2.55H21.6v2.35h4.95v2.55H21.6v5.35h-3.35V16.1Z"
+    fill="#FFFFFF"
+  />
+  <path d="M31.2 13.2 29.9 16.4h1.95l-2.65 1.05 1.05-3.55h-1.95l1.8-1.3Z" fill="#6B96FF" opacity="0.95" />
+</svg>

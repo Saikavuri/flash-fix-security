@@ -6,8 +6,13 @@ import { useReveal } from "@/components/motion/useReveal";
 import { ShieldCheck, Wrench, Headset, ArrowRight } from "lucide-react";
 import { trustPillars, servicePillars } from "@/data/site";
 import { business, whatsappLink } from "@/config/business";
+import { contactQuoteHref } from "@/config/navigation";
 
-export function TrustSection() {
+type TrustSectionProps = {
+  quoteCtaHref?: string;
+};
+
+export function TrustSection({ quoteCtaHref = contactQuoteHref }: TrustSectionProps) {
   const reveal = useReveal();
 
   return (
@@ -18,14 +23,18 @@ export function TrustSection() {
           <motion.div
             className="lg:col-span-5"
                         {...reveal({ opacity: 0, y: 30 }, { opacity: 1, y: 0 }, { delay: 0, duration: 0.8 })}>
-            <div className="media aspect-[4/5] w-full rounded-lg">
+            <div className="group media aspect-[4/5] w-full overflow-hidden rounded-lg bg-ink-900">
               <Image
                 src="/images/trust/maintenance.jpg"
                 alt="Engineer performing scheduled preventive maintenance on a security camera"
                 fill
                 quality={84}
                 sizes="(max-width: 1024px) 100vw, 42vw"
-                className="size-full object-cover"
+                className="size-full object-cover object-[50%_38%] transition-transform duration-[1200ms] ease-out-expo group-hover:scale-[1.03]"
+              />
+              <div
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/40 via-transparent to-transparent"
+                aria-hidden
               />
             </div>
 
@@ -125,7 +134,7 @@ export function TrustSection() {
                   aria-hidden
                 />
               </a>
-              <a href="#quote" className="btn btn-outline">
+              <a href={quoteCtaHref} className="btn btn-outline">
                 Request a Visit
               </a>
             </motion.div>

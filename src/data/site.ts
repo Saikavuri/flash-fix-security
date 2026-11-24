@@ -26,6 +26,8 @@ export type Service = {
   description: string;
   image: string;
   imageAlt: string;
+  /** CSS object-position for marketing photography crops. */
+  imageFocus?: string;
   icon: LucideIcon;
   highlights: string[];
   /** Contextual WhatsApp message for this service. */
@@ -44,6 +46,7 @@ export const services: Service[] = [
       "We survey the property, map camera positions against actual sightlines and lighting, then run concealed cabling, mount and align every unit, and finally configure recording, remote access and mobile viewing so the system is genuinely usable from day one.",
     image: "/images/services/installation.jpg",
     imageAlt: "Technician mounting a security camera on a building facade",
+    imageFocus: "50% 42%",
     icon: Wrench,
     highlights: [
       "Site survey and camera placement plan",
@@ -63,6 +66,7 @@ export const services: Service[] = [
       "Supply only, or supply and install. We help you choose the camera type, lens, channel count and recording capacity that actually fit the property and the footage you need to keep, then deliver and install if you want us to.",
     image: "/images/services/supply.jpg",
     imageAlt: "Shelves of boxed CCTV cameras and recorders in a supply store",
+    imageFocus: "48% 50%",
     icon: Package,
     highlights: [
       "Dome, bullet, IP, wireless and PTZ ranges",
@@ -82,6 +86,7 @@ export const services: Service[] = [
       "No footage, distorted image, dropped recording, storage failure or a camera offline: we diagnose the fault, replace failed components and re-tune the system so it records reliably again. We service third-party installations too.",
     image: "/images/services/repair.jpg",
     imageAlt: "Close-up of a technician servicing a camera wiring loom",
+    imageFocus: "55% 45%",
     icon: LifeBuoy,
     highlights: [
       "On-site diagnosis of camera and recorder faults",
@@ -101,6 +106,7 @@ export const services: Service[] = [
       "We audit what you have today, then design the migration: camera bodies, cabling, NVR or DVR capacity, storage and remote access. You get a clear picture of what changes, what is reused and what it costs before anything is touched.",
     image: "/images/services/upgrades.jpg",
     imageAlt: "Technician replacing an older camera with a modern network camera",
+    imageFocus: "52% 40%",
     icon: RefreshCw,
     highlights: [
       "Audit of existing equipment and cabling",
@@ -120,6 +126,7 @@ export const services: Service[] = [
       "Cameras drift, connectors corrode, storage fills, lenses fog and recordings stop without warning. Scheduled maintenance visits clean lenses, check alignment, verify recording and storage health, tighten connections and fault-fix proactively — before a customer or incident needs the footage.",
     image: "/images/services/maintenance.jpg",
     imageAlt: "Engineer cleaning and re-aligning a dome camera during a maintenance visit",
+    imageFocus: "46% 38%",
     icon: ShieldCheck,
     highlights: [
       "Scheduled preventive maintenance visits",
@@ -164,6 +171,7 @@ export type Product = {
   description: string;
   image: string;
   imageAlt: string;
+  imageFocus?: string;
   icon: LucideIcon;
 };
 
@@ -178,12 +186,11 @@ export const productCategories: {
   id: ProductCategory | "all";
   label: string;
 }[] = [
-  { id: "all", label: "All" },
+  { id: "all", label: "All cameras" },
   { id: "cameras", label: "Dome & Bullet" },
   { id: "ip", label: "IP / Network" },
   { id: "wireless", label: "Wireless" },
   { id: "ptz", label: "PTZ" },
-  { id: "recorder", label: "DVR & NVR" },
 ];
 
 export const products: Product[] = [
@@ -196,6 +203,7 @@ export const products: Product[] = [
       "Ceiling and wall-mounted dome units for corridors, offices, shops and lobbies where a visible camera should still look unobtrusive.",
     image: "/images/products/dome.jpg",
     imageAlt: "White dome security camera mounted on a ceiling",
+    imageFocus: "50% 45%",
     icon: Camera,
   },
   {
@@ -207,6 +215,7 @@ export const products: Product[] = [
       "Long-bodied outdoor cameras for perimeter walls, gates, corridors and open yards, built to read at distance and hold up in weather.",
     image: "/images/products/bullet.jpg",
     imageAlt: "Bullet-style outdoor security camera on a bracket",
+    imageFocus: "52% 48%",
     icon: Camera,
   },
   {
@@ -215,9 +224,10 @@ export const products: Product[] = [
     category: "ip",
     tagline: "One cable, one network",
     description:
-      "Network cameras that carry power and data over a single run, giving higher detail and direct NVR or network recording.",
+      "Network cameras that carry power and data over a single run, giving higher detail and sharper footage for identification at gates and counters.",
     image: "/images/products/ip.jpg",
     imageAlt: "Network dome camera with a wired connection into a recorder",
+    imageFocus: "48% 50%",
     icon: Radio,
   },
   {
@@ -229,6 +239,7 @@ export const products: Product[] = [
       "Wi-Fi cameras suited to finished interiors and heritage façades where running new cable is impractical.",
     image: "/images/products/wireless.jpg",
     imageAlt: "Compact wireless security camera on a shelf",
+    imageFocus: "50% 42%",
     icon: Radio,
   },
   {
@@ -240,6 +251,7 @@ export const products: Product[] = [
       "Pan-tilt-zoom units for car parks, lobbies and large halls, where one controllable camera covers a wide area.",
     image: "/images/products/ptz.jpg",
     imageAlt: "PTZ dome camera in a dark lobby",
+    imageFocus: "50% 40%",
     icon: Camera,
   },
   {
@@ -277,9 +289,14 @@ export const products: Product[] = [
   },
 ];
 
+/** CCTV cameras only — recorders and accessories are quoted separately on enquiry. */
+export const cctvCameras = products.filter((p) => p.category !== "recorder");
+
 /* ==========================================================================
    Solutions by property type
    ========================================================================== */
+
+export type SolutionSegment = "residential" | "retail" | "commercial" | "industrial";
 
 export type Solution = {
   id: string;
@@ -287,10 +304,20 @@ export type Solution = {
   description: string;
   image: string;
   imageAlt: string;
+  imageFocus?: string;
   points: string[];
-  /** Layout weight — drives the asymmetric grid. */
+  segment: SolutionSegment;
+  /** Layout weight — drives the asymmetric grid on legacy layouts. */
   span: "wide" | "tall" | "standard";
 };
+
+export const solutionSegments: { id: SolutionSegment | "all"; label: string }[] = [
+  { id: "all", label: "All properties" },
+  { id: "residential", label: "Homes & communities" },
+  { id: "retail", label: "Shops & retail" },
+  { id: "commercial", label: "Offices & buildings" },
+  { id: "industrial", label: "Warehouses & factories" },
+];
 
 export const solutions: Solution[] = [
   {
@@ -301,6 +328,7 @@ export const solutions: Solution[] = [
     image: "/images/solutions/home.jpg",
     imageAlt: "Modern residential house exterior at dusk",
     points: ["Gate and entry coverage", "Living-area monitoring", "App access for the family"],
+    segment: "residential",
     span: "tall",
   },
   {
@@ -311,6 +339,7 @@ export const solutions: Solution[] = [
     image: "/images/solutions/apartment.jpg",
     imageAlt: "Contemporary apartment building lobby",
     points: ["Lobby and corridor cameras", "Parking and ramp coverage", "Minimal cabling footprint"],
+    segment: "residential",
     span: "standard",
   },
   {
@@ -321,6 +350,7 @@ export const solutions: Solution[] = [
     image: "/images/solutions/shop.jpg",
     imageAlt: "Retail shop interior with a counter and shelving",
     points: ["Counter and till coverage", "Entrance and queue monitoring", "Stockroom and staff areas"],
+    segment: "retail",
     span: "standard",
   },
   {
@@ -331,6 +361,7 @@ export const solutions: Solution[] = [
     image: "/images/solutions/office.jpg",
     imageAlt: "Modern open-plan office interior",
     points: ["Entry and visitor management", "Workstation coverage", "Meeting room monitoring"],
+    segment: "commercial",
     span: "standard",
   },
   {
@@ -341,6 +372,7 @@ export const solutions: Solution[] = [
     image: "/images/solutions/warehouse.jpg",
     imageAlt: "Warehouse racking aisles under industrial lighting",
     points: ["Aisle and racking coverage", "Loading bay monitoring", "Long-retention storage"],
+    segment: "industrial",
     span: "wide",
   },
   {
@@ -351,6 +383,7 @@ export const solutions: Solution[] = [
     image: "/images/solutions/commercial.jpg",
     imageAlt: "Commercial office tower facade at night",
     points: ["Perimeter and ground coverage", "Floor-by-floor deployment", "Centralised recording"],
+    segment: "commercial",
     span: "standard",
   },
   {
@@ -361,6 +394,7 @@ export const solutions: Solution[] = [
     image: "/images/solutions/factory.jpg",
     imageAlt: "Industrial factory floor with machinery",
     points: ["Production and machine areas", "Site entry and gate coverage", "Hardened outdoor units"],
+    segment: "industrial",
     span: "standard",
   },
   {
@@ -371,6 +405,7 @@ export const solutions: Solution[] = [
     image: "/images/solutions/community.jpg",
     imageAlt: "Gated residential community entrance at night",
     points: ["Gate and boom barrier", "Perimeter wall coverage", "Common area and parking"],
+    segment: "residential",
     span: "standard",
   },
 ];
@@ -421,6 +456,7 @@ export type Project = {
   location: string;
   image: string;
   imageAlt: string;
+  imageFocus?: string;
   featured?: boolean;
 };
 

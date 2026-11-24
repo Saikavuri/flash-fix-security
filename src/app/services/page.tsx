@@ -3,10 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
+import { pageHeroImages } from "@/config/page-heroes";
 import { Reveal } from "@/components/motion/Reveal";
 import { FaqAccordion } from "@/components/home/FaqAccordion";
-import { QuoteSection } from "@/components/home/QuoteSection";
 import { services } from "@/data/site";
+import { contactQuoteHref } from "@/config/navigation";
 import { business, whatsappLink } from "@/config/business";
 
 export const metadata: Metadata = {
@@ -23,10 +24,11 @@ export default function ServicesPage() {
         title="One team for"
         titleMuted="the whole lifecycle."
         description="Supply, installation, repair, upgrades and maintenance — handled by the same people, so nothing falls between vendors."
-        image="/images/pages/services.jpg"
+        image={pageHeroImages.services.src}
+        imageFocus={pageHeroImages.services.focus}
       >
         <div className="mt-9 flex flex-wrap gap-3">
-          <a href="#quote" className="btn btn-electric group">
+          <a href={contactQuoteHref} className="btn btn-electric group">
             Get a Free Quote
             <ArrowRight
               className="size-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-1"
@@ -70,6 +72,7 @@ export default function ServicesPage() {
                         quality={84}
                         sizes="(max-width: 1024px) 100vw, 58vw"
                         className="size-full object-cover transition-transform duration-[1200ms] ease-out-expo group-hover:scale-[1.04]"
+                        style={{ objectPosition: service.imageFocus ?? "50% 50%" }}
                       />
                     </div>
                     <div className="pointer-events-none absolute left-0 top-0 flex items-center gap-3 bg-ink-950/85 px-5 py-3 backdrop-blur-md">
@@ -105,7 +108,7 @@ export default function ServicesPage() {
                       ))}
                     </ul>
                     <div className="mt-9 flex flex-wrap items-center gap-3">
-                      <a href="#quote" className="btn btn-outline group">
+                      <a href={contactQuoteHref} className="btn btn-outline group">
                         Request {service.shortTitle.toLowerCase()}
                         <ArrowRight
                           className="size-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-1"
@@ -160,7 +163,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <QuoteSection />
     </>
   );
 }

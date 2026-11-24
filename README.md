@@ -219,12 +219,25 @@ stylesheet also neutralises CSS animations and transitions.
 
 ### Where enquiries go
 
-By default the enquiry is written to `data/enquiries.json` on the server, so a
-success state always reflects a real, saved submission. If persistence fails,
-the endpoint returns a 500 and the form shows an error — **it never shows a false
-success**.
+Each enquiry is written to `data/enquiries.json` on the server **and** emailed to
+the business inbox when Gmail SMTP is configured (see `.env.example`).
 
-To forward enquiries to a CRM, Google Sheet, or email service instead, set:
+```bash
+cp .env.example .env.local
+# Edit .env.local — add your Gmail App Password (not your normal login password).
+```
+
+| Variable | Purpose |
+| --- | --- |
+| `GMAIL_USER` | Gmail account used to send (e.g. `flashfixhyd1@gmail.com`) |
+| `GMAIL_APP_PASSWORD` | 16-character [Google App Password](https://myaccount.google.com/apppasswords) |
+| `ENQUIRY_NOTIFY_EMAIL` | Inbox that receives leads (defaults to `business.email` in `business.ts`) |
+
+If persistence fails, the endpoint returns a 500 and the form shows an error — **it
+never shows a false success**. If email fails but the file save worked, the visitor
+still sees success (check server logs).
+
+To also forward enquiries to a CRM, Google Sheet, or automation tool, set:
 
 ```bash
 ENQUIRY_WEBHOOK_URL=https://your-endpoint.example/enquiries

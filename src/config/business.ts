@@ -19,7 +19,7 @@ export const business = {
   legalName: "Flash Fix Computers & Security Systems",
 
   /** Tagline shown under the logo in the header */
-  tagline: "Comsec & CCTV Systems",
+  tagline: "CCTV Systems",
 
   /** City / primary service region */
   city: "Hyderabad",
@@ -38,22 +38,22 @@ export const business = {
   /** Human-readable phone for display */
   phoneDisplay: "+91 90305 46555",
 
-  email: "REPLACE_EMAIL",
+  email: "flashfixhyd1@gmail.com",
 
   /** Shop / office address */
   address: {
-    line1: "REPLACE_ADDRESS_LINE_1",
-    line2: "REPLACE_ADDRESS_LINE_2",
+    line1: "Block C 1-57/10C, Plot No 10C, 3rd St",
+    line2: "Kondapur, Sri Ram Nagar",
     city: "Hyderabad",
     state: "Telangana",
-    pincode: "REPLACE_PINCODE",
+    pincode: "500084",
     country: "India",
   },
 
   /** Business hours — keep in sync with Google Business Profile */
   hours: [
-    { days: "Monday – Saturday", time: "REPLACE_OPEN_TIME – REPLACE_CLOSE_TIME" },
-    { days: "Sunday", time: "REPLACE_SUNDAY_HOURS" },
+    { days: "Monday – Saturday", time: "9:00 AM – 8:00 PM" },
+    { days: "Sunday", time: "9:00 AM – 6:00 PM" },
   ],
 
   /**
@@ -61,18 +61,19 @@ export const business = {
    * These appear in the footer and on the contact page.
    */
   serviceAreas: [
-    "REPLACE_AREA_1",
-    "REPLACE_AREA_2",
-    "REPLACE_AREA_3",
-    "REPLACE_AREA_4",
-    "REPLACE_AREA_5",
-    "REPLACE_AREA_6",
-    "REPLACE_AREA_7",
-    "REPLACE_AREA_8",
+    "Kondapur",
+    "Gachibowli",
+    "Madhapur",
+    "HITEC City",
+    "Miyapur",
+    "Kukatpally",
+    "Banjara Hills",
+    "Jubilee Hills",
   ],
 
   /** Google Maps link for the "Get directions" action */
-  mapsUrl: "REPLACE_MAPS_URL",
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=Block+C+1-57%2F10C%2C+Plot+No+10C%2C+3rd+St%2C+Kondapur%2C+Sri+Ram+Nagar%2C+Hyderabad%2C+Telangana+500084",
 
   /** Social profiles — leave empty strings to hide the icon entirely */
   social: {

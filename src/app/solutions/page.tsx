@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
-import { SolutionsGrid } from "@/components/home/SolutionsGrid";
-import { QuoteSection } from "@/components/home/QuoteSection";
+import { pageHeroImages } from "@/config/page-heroes";
+import { SolutionsExplorer } from "@/components/solutions/SolutionsExplorer";
 import { ClosingCta } from "@/components/home/ClosingCta";
+import { contactQuoteHref } from "@/config/navigation";
 import { whatsappLink } from "@/config/business";
 
 export const metadata: Metadata = {
@@ -21,10 +22,11 @@ export default function SolutionsPage() {
         title="Coverage designed for"
         titleMuted="how the space is used."
         description="Homes, shops, offices and industrial sites all fail in different ways. Here is what we typically deploy for each — and why."
-        image="/images/pages/solutions.jpg"
+        image={pageHeroImages.solutions.src}
+        imageFocus={pageHeroImages.solutions.focus}
       >
         <div className="mt-9 flex flex-wrap gap-3">
-          <a href="#quote" className="btn btn-electric group">
+          <a href={contactQuoteHref} className="btn btn-electric group">
             Get a Free Quote
             <ArrowRight
               className="size-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-1"
@@ -45,10 +47,10 @@ export default function SolutionsPage() {
         </div>
       </PageHero>
 
-      <SolutionsGrid />
+      <SolutionsExplorer />
 
       {/* --- Guidance ------------------------------------------------------ */}
-      <section className="bg-white">
+      <section className="border-t border-ink-950/8 bg-white">
         <div className="shell py-section">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
@@ -118,7 +120,6 @@ export default function SolutionsPage() {
         </div>
       </section>
 
-      <QuoteSection />
       <ClosingCta />
     </>
   );

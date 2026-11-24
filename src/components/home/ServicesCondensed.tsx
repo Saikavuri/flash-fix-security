@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { services } from "@/data/site";
 import { business, whatsappLink } from "@/config/business";
 import { useReveal } from "@/components/motion/useReveal";
-
 /**
  * Condensed services strip for the homepage.
  *
@@ -54,9 +54,11 @@ export function ServicesCondensed() {
         </div>
 
         {/* --- Three featured cards -------------------------------------- */}
-        <div className="mt-14 grid gap-5 lg:mt-20 lg:grid-cols-3">
+        <div className="mt-14 grid gap-6 lg:mt-20 lg:grid-cols-3 lg:gap-5">
           {featured.map((service, i) => {
             const Icon = service.icon;
+            const focus = service.imageFocus ?? "50% 50%";
+            const cardIndex = String(i + 1).padStart(2, "0");
 
             return (
               <motion.article
@@ -66,37 +68,65 @@ export function ServicesCondensed() {
                   { opacity: 1, y: 0 },
                   { delay: i * 0.08, duration: 0.75 }
                 )}
-                className="group flex flex-col overflow-hidden rounded-lg border border-ink-950/8 bg-white transition-shadow duration-500 hover:shadow-lift-lg"
+                className="group flex flex-col overflow-hidden rounded-xl border border-ink-950/8 bg-white shadow-[0_1px_0_rgba(7,9,14,0.04)] transition-all duration-500 hover:border-electric-500/20 hover:shadow-lift-lg"
               >
-                <div className="media aspect-[16/10] w-full rounded-none">
-                  <Image
-                    src={service.image}
-                    alt={service.imageAlt}
-                    fill
-                    quality={82}
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                    className="size-full object-cover transition-transform duration-[1100ms] ease-out-expo group-hover:scale-[1.06]"
-                  />
+                <Link
+                  href={`/services#${service.id}`}
+                  className="relative block outline-none focus-visible:ring-2 focus-visible:ring-electric-500 focus-visible:ring-offset-2"
+                >
+                  <div className="media aspect-[16/10] w-full rounded-none bg-ink-900">
+                    <Image
+                      src={service.image}
+                      alt={service.imageAlt}
+                      fill
+                      quality={84}
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="size-full object-cover transition-transform duration-[1100ms] ease-out-expo group-hover:scale-[1.05]"
+                      style={{ objectPosition: focus }}
+                    />
+                    <div className="scrim-bottom pointer-events-none absolute inset-0" aria-hidden />
+                    <div
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-ink-950/35 via-transparent to-transparent opacity-80"
+                      aria-hidden
+                    />
+                  </div>
+
                   <div
-                    className="pointer-events-none absolute left-0 top-0 flex items-center gap-2.5 bg-ink-950/85 px-4 py-2.5 backdrop-blur-md"
+                    className="pointer-events-none absolute left-0 top-0 flex items-center gap-2.5 rounded-br-xl border border-white/10 border-l-0 border-t-0 bg-ink-950/80 px-4 py-2.5 backdrop-blur-md"
                     aria-hidden
                   >
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-white/50">
-                      {service.index}
+                    <span className="font-mono text-[10px] tracking-[0.2em] text-electric-300/90">
+                      {cardIndex}
                     </span>
+                    <span className="h-3 w-px bg-white/20" aria-hidden />
                     <Icon className="size-3.5 text-electric-400" aria-hidden />
                   </div>
-                </div>
+                </Link>
 
-                <div className="flex flex-1 flex-col p-7">
-                  <h3 className="font-display text-xl font-semibold tracking-[-0.02em] text-ink-950">
+                <div className="flex flex-1 flex-col p-7 pt-6">
+                  <Link
+                    href={`/services#${service.id}`}
+                    className="font-display text-xl font-semibold tracking-[-0.02em] text-ink-950 transition-colors duration-300 hover:text-electric-600"
+                  >
                     {service.title}
-                  </h3>
-                  <p className="mt-3 flex-1 text-[15px] leading-relaxed text-ink-600">
+                  </Link>
+
+                  <ul className="mt-3 flex flex-wrap gap-2" aria-label={`${service.title} highlights`}>
+                    {service.highlights.slice(0, 2).map((item) => (
+                      <li
+                        key={item}
+                        className="rounded-full border border-ink-950/8 bg-bone-50 px-3 py-1 text-[11.5px] font-medium leading-snug text-ink-700"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <p className="mt-4 flex-1 text-[15px] leading-relaxed text-ink-600">
                     {service.description}
                   </p>
 
-                  <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+                  <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-ink-950/8 pt-5">
                     <a
                       href="#quote"
                       className="link-underline text-[14px] font-semibold text-ink-950"
@@ -111,7 +141,7 @@ export function ServicesCondensed() {
                       )}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-[13.5px] font-medium text-ink-500 transition-colors duration-300 hover:text-ink-950"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-ink-950/10 bg-white px-3 py-1.5 text-[13px] font-medium text-ink-600 transition-colors duration-300 hover:border-signal-500/30 hover:text-ink-950"
                     >
                       <MessageCircle className="size-3.5 text-signal-500" aria-hidden />
                       WhatsApp
@@ -125,7 +155,7 @@ export function ServicesCondensed() {
 
         {/* --- Link to the full services page ---------------------------- */}
         <motion.div
-          className="mt-12 flex flex-col items-center justify-between gap-5 rounded-lg border border-ink-950/8 bg-bone-100 px-7 py-6 sm:flex-row"
+          className="mt-12 flex flex-col items-center justify-between gap-5 rounded-xl border border-ink-950/8 bg-bone-100 px-7 py-6 sm:flex-row"
           {...reveal({ opacity: 0, y: 18 }, { opacity: 1, y: 0 }, { duration: 0.6 })}
         >
           <div>

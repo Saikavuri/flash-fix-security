@@ -6,7 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useReveal } from "@/components/motion/useReveal";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import {
-  products,
+  cctvCameras,
   productCategories,
   type ProductCategory,
 } from "@/data/site";
@@ -23,8 +23,8 @@ export function ProductShowcase() {
   const visible = useMemo(
     () =>
       filter === "all"
-        ? products
-        : products.filter((p) => p.category === filter),
+        ? cctvCameras
+        : cctvCameras.filter((p) => p.category === filter),
     [filter]
   );
 
@@ -53,9 +53,8 @@ export function ProductShowcase() {
           <motion.p
             className="lede lg:col-span-5 lg:pb-2"
             {...reveal({ opacity: 0, y: 20 }, { opacity: 1, y: 0 }, { delay: 0.14, duration: 0.7 })}>
-            We supply cameras, recorders and the accessories that make a system
-            reliable. Specifications, pricing and availability are confirmed when we
-            quote — no guesswork.
+            We supply CCTV cameras for homes, shops, offices and industrial sites.
+            Model, pricing and availability are confirmed when we quote — no guesswork.
           </motion.p>
         </div>
 
@@ -95,12 +94,12 @@ export function ProductShowcase() {
             {visible.map((product) => (
               <motion.article
                 key={product.id}
+                id={product.id}
                 layout
                 initial={reduce ? false : { opacity: 0, y: 24, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={reduce ? undefined : { opacity: 0, y: -12, scale: 0.98 }}
-                
-                className="group flex flex-col"
+                className="group scroll-mt-28 flex flex-col"
               >
                 <div className="media aspect-[4/3] w-full rounded-lg bg-white">
                   <Image
@@ -110,6 +109,7 @@ export function ProductShowcase() {
                     quality={82}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="size-full object-cover transition-transform duration-[1000ms] ease-out-expo group-hover:scale-[1.07]"
+                    style={{ objectPosition: product.imageFocus ?? "50% 50%" }}
                   />
                   <div
                     className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/25 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"

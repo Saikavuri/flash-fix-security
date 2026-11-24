@@ -5,8 +5,14 @@ import { motion } from "framer-motion";
 import { useReveal } from "@/components/motion/useReveal";
 import { ArrowRight, MessageCircle, Phone } from "lucide-react";
 import { business, telLink, whatsappLink } from "@/config/business";
+import { contactQuoteHref } from "@/config/navigation";
 
-export function ClosingCta() {
+type ClosingCtaProps = {
+  /** Where “Get a Free Quote” scrolls or navigates — use `#quote` on home only. */
+  quoteCtaHref?: string;
+};
+
+export function ClosingCta({ quoteCtaHref = contactQuoteHref }: ClosingCtaProps) {
   const reveal = useReveal();
 
   return (
@@ -55,7 +61,7 @@ export function ClosingCta() {
           <motion.div
             className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
             {...reveal({ opacity: 0, y: 20 }, { opacity: 1, y: 0 }, { delay: 0.22, duration: 0.8 })}>
-            <a href="#quote" className="btn btn-electric group w-full sm:w-auto">
+            <a href={quoteCtaHref} className="btn btn-electric group w-full sm:w-auto">
               Get a Free Quote
               <ArrowRight
                 className="size-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-1"

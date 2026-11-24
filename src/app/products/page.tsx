@@ -2,16 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
+import { pageHeroImages } from "@/config/page-heroes";
 import { ProductShowcase } from "@/components/home/ProductShowcase";
-import { QuoteSection } from "@/components/home/QuoteSection";
 import { ClosingCta } from "@/components/home/ClosingCta";
-import { products } from "@/data/site";
+import { contactQuoteHref } from "@/config/navigation";
+import { cctvCameras } from "@/data/site";
 import { whatsappLink } from "@/config/business";
 
 export const metadata: Metadata = {
-  title: "CCTV Products — Cameras, DVR & NVR Systems in Hyderabad",
+  title: "CCTV Cameras — Dome, Bullet, IP & Wireless in Hyderabad",
   description:
-    "Dome, bullet, IP, wireless and PTZ cameras plus DVR and NVR recorders and accessories. Enquire for pricing on every product.",
+    "Dome, bullet, IP, wireless and PTZ CCTV cameras for Hyderabad. Enquire for pricing — models matched to your site after survey.",
 };
 
 export default function ProductsPage() {
@@ -19,13 +20,14 @@ export default function ProductsPage() {
     <>
       <PageHero
         eyebrow="Products"
-        title="Cameras and recorders"
-        titleMuted="that earn their place."
-        description="We supply a focused range of CCTV equipment and help you pick what the site actually needs — no padding, no guesswork."
-        image="/images/pages/products.jpg"
+        title="CCTV cameras"
+        titleMuted="that fit the site."
+        description="We supply dome, bullet, IP, wireless and PTZ cameras and help you pick what the property actually needs — no generic kits."
+        image={pageHeroImages.products.src}
+        imageFocus={pageHeroImages.products.focus}
       >
         <div className="mt-9 flex flex-wrap gap-3">
-          <a href="#quote" className="btn btn-electric group">
+          <a href={contactQuoteHref} className="btn btn-electric group">
             Enquire for Price
             <ArrowRight
               className="size-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-1"
@@ -63,7 +65,7 @@ export default function ProductsPage() {
           </div>
 
           <ul className="mt-10 grid gap-px overflow-hidden rounded-lg border border-ink-950/8 bg-ink-950/8 sm:grid-cols-2 lg:grid-cols-4">
-            {products.map((product) => (
+            {cctvCameras.map((product) => (
               <li key={product.id}>
                 <Link
                   href="/products"
@@ -97,7 +99,6 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      <QuoteSection />
       <ClosingCta />
     </>
   );

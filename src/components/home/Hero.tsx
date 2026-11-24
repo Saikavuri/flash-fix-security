@@ -7,6 +7,8 @@ import { business, whatsappLink } from "@/config/business";
 import { EASE } from "@/lib/motion";
 
 const headline = ["Security, Engineered", "Around You."];
+/** Bumped filename so browsers / Next image cache pick up the new photo. */
+const HERO_IMAGE = "/images/hero/surveillance-hero.jpg";
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -142,23 +144,23 @@ export function Hero() {
                 transition={{ duration: 2.2, ease: EASE.outExpo, delay: 0.35 }}
               >
                 <Image
-                  src="/images/hero/cctv-hero.jpg"
-                  alt="Close-up of a CCTV camera lens with a luminous blue iris"
+                  src={HERO_IMAGE}
+                  alt="A modern surveillance camera mounted on a building at dusk, with soft city lights in the background"
                   fill
                   priority
                   quality={90}
                   sizes="(max-width: 1024px) 100vw, 44vw"
-                  className="size-full object-cover transition-transform duration-[1400ms] ease-out-expo group-hover:scale-[1.05]"
+                  className="size-full object-cover object-[50%_38%] transition-transform duration-[1400ms] ease-out-expo group-hover:scale-[1.05]"
                 />
               </motion.div>
 
               {/* Cinematic grade — kept light so the artwork stays visible */}
               <div
-                className="absolute inset-0 bg-gradient-to-t from-navy-950/45 via-transparent to-transparent"
+                className="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-navy-950/10 to-transparent"
                 aria-hidden
               />
               <div
-                className="absolute inset-0 bg-gradient-to-br from-navy-950/20 via-transparent to-transparent"
+                className="absolute inset-0 bg-gradient-to-br from-navy-950/25 via-transparent to-electric-500/10"
                 aria-hidden
               />
 

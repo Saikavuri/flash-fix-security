@@ -3,11 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
+import { pageHeroImages } from "@/config/page-heroes";
 import { Reveal } from "@/components/motion/Reveal";
 import { ProcessTimeline } from "@/components/home/ProcessTimeline";
 import { TrustSection } from "@/components/home/TrustSection";
-import { QuoteSection } from "@/components/home/QuoteSection";
 import { ClosingCta } from "@/components/home/ClosingCta";
+import { contactQuoteHref } from "@/config/navigation";
 import { business, whatsappLink } from "@/config/business";
 
 export const metadata: Metadata = {
@@ -24,10 +25,11 @@ export default function AboutPage() {
         title="A security company"
         titleMuted="that stays after the invoice."
         description="We install, supply, repair and maintain CCTV systems across Hyderabad — and we keep supporting the systems we build."
-        image="/images/pages/about.jpg"
+        image={pageHeroImages.about.src}
+        imageFocus={pageHeroImages.about.focus}
       >
         <div className="mt-9 flex flex-wrap gap-3">
-          <a href="#quote" className="btn btn-electric group">
+          <a href={contactQuoteHref} className="btn btn-electric group">
             Get a Free Quote
             <ArrowRight
               className="size-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-1"
@@ -144,7 +146,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <QuoteSection />
       <ClosingCta />
     </>
   );

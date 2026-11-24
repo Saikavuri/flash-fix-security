@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
+import { pageHeroImages } from "@/config/page-heroes";
 import { Reveal } from "@/components/motion/Reveal";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
 import { business, telLink, whatsappLink } from "@/config/business";
@@ -19,7 +20,8 @@ export default function ContactPage() {
         title="Let's talk about"
         titleMuted="your property."
         description="Call, message on WhatsApp, or send an enquiry. Whichever is easiest — we will come back with a clear quotation."
-        image="/images/pages/contact.jpg"
+        image={pageHeroImages.contact.src}
+        imageFocus={pageHeroImages.contact.focus}
       />
 
       {/* --- Contact details + form ---------------------------------------- */}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/PageHero";
+import { pageHeroImages } from "@/config/page-heroes";
 import { ProjectGallery } from "@/components/home/ProjectGallery";
-import { QuoteSection } from "@/components/home/QuoteSection";
 import { ClosingCta } from "@/components/home/ClosingCta";
 
 export const metadata: Metadata = {
@@ -18,12 +18,12 @@ export default function ProjectsPage() {
         title="Installed work,"
         titleMuted="site by site."
         description="A selection of completed installations across Hyderabad. Tap any image to view it larger."
-        image="/images/pages/projects.jpg"
+        image={pageHeroImages.projects.src}
+        imageFocus={pageHeroImages.projects.focus}
       />
 
       <ProjectGallery />
 
-      <QuoteSection />
       <ClosingCta />
     </>
   );

@@ -43,7 +43,7 @@ export function FaqAccordion() {
             <motion.div
               className="mt-8"
             {...reveal({ opacity: 0, y: 18 }, { opacity: 1, y: 0 }, { delay: 0.18, duration: 0.7 })}>
-              <a href="#quote" className="btn btn-outline group">
+              <a href="/contact#quote" className="btn btn-outline group">
                 Ask your question
               </a>
             </motion.div>

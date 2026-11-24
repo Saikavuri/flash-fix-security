@@ -4,6 +4,12 @@ export type NavItem = {
   description?: string;
 };
 
+/** Enquiry form anchor — homepage only. */
+export const homeQuoteHref = "/#quote";
+
+/** Enquiry form anchor — dedicated contact page. */
+export const contactQuoteHref = "/contact#quote";
+
 export const navItems: NavItem[] = [
   { label: "Services", href: "/services" },
   { label: "Products", href: "/products" },
@@ -27,12 +33,11 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
   {
     title: "Products",
     items: [
-      { label: "Dome Cameras", href: "/products#dome" },
-      { label: "Bullet Cameras", href: "/products#bullet" },
-      { label: "IP Cameras", href: "/products#ip" },
-      { label: "Wireless Cameras", href: "/products#wireless" },
-      { label: "PTZ Cameras", href: "/products#ptz" },
-      { label: "DVR & NVR", href: "/products#recorder" },
+      { label: "Dome Cameras", href: "/products#dome-camera" },
+      { label: "Bullet Cameras", href: "/products#bullet-camera" },
+      { label: "IP Cameras", href: "/products#ip-camera" },
+      { label: "Wireless Cameras", href: "/products#wireless-camera" },
+      { label: "PTZ Cameras", href: "/products#ptz-camera" },
     ],
   },
   {

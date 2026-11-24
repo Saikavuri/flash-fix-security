@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/PageHero";
+import { pageHeroImages } from "@/config/page-heroes";
 import { Reveal } from "@/components/motion/Reveal";
 import { business, formattedAddress } from "@/config/business";
 
@@ -15,7 +16,8 @@ export default function PrivacyPage() {
         eyebrow="Legal"
         title="Privacy policy"
         description="What we collect when you use this website, why we collect it, and what we do with it."
-        image="/images/pages/contact.jpg"
+        image={pageHeroImages.privacy.src}
+        imageFocus={pageHeroImages.privacy.focus}
       />
 
       <section className="bg-white">

@@ -26,10 +26,10 @@ export const metadata: Metadata = {
     template: `%s | ${business.name}`,
   },
   description:
-    "CCTV installation, product supply, repair, upgrades and AMC maintenance across Hyderabad. Dome, bullet, IP, wireless and PTZ cameras with DVR and NVR systems.",
+    "CCTV installation, product supply, repair, upgrades and AMC maintenance across Hyderabad. Dome, bullet, IP, wireless and PTZ CCTV cameras.",
   keywords: [
     "Flash Fix Computers and Security Systems",
-    "Flash Fix Comsec",
+    "Flash Fix CCTV",
     "CCTV installation Hyderabad",
     "CCTV camera dealer Hyderabad",
     "CCTV repair Hyderabad",

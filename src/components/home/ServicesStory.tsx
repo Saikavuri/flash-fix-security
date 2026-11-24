@@ -69,6 +69,7 @@ export function ServicesStory() {
                       quality={84}
                       sizes="(max-width: 1024px) 100vw, 58vw"
                       className="size-full object-cover transition-transform duration-[1200ms] ease-out-expo group-hover:scale-[1.04]"
+                      style={{ objectPosition: service.imageFocus ?? "50% 50%" }}
                     />
                   </div>
 

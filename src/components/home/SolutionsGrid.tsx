@@ -133,7 +133,7 @@ export function SolutionsGrid() {
         <motion.div
           className="mt-12 flex justify-center lg:mt-16"
                       {...reveal({ opacity: 0, y: 16 }, { opacity: 1, y: 0 }, { delay: 0, duration: 0.6 })}>
-          <a href="#quote" className="btn btn-ghost-dark group">
+          <a href="/contact#quote" className="btn btn-ghost-dark group">
             Discuss your property
             <ArrowUpRight
               className="size-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5"

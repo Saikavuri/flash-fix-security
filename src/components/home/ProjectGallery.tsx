@@ -108,6 +108,7 @@ export function ProjectGallery() {
                       : "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   }
                   className="size-full object-cover transition-transform duration-[1100ms] ease-out-expo group-hover:scale-[1.07]"
+                  style={{ objectPosition: project.imageFocus ?? "50% 50%" }}
                 />
               </div>
 
@@ -204,6 +205,7 @@ export function ProjectGallery() {
                   quality={88}
                   sizes="100vw"
                   className="size-full object-cover"
+                  style={{ objectPosition: current.imageFocus ?? "50% 50%" }}
                 />
               </div>
               <figcaption className="mt-4 flex flex-wrap items-baseline justify-between gap-2 text-white">

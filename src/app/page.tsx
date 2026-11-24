@@ -20,9 +20,9 @@ export default function HomePage() {
       <ServicesCondensed />
       <ProductsCondensed />
       <ProcessTimeline />
-      <TrustSection />
+      <TrustSection quoteCtaHref="#quote" />
       <QuoteSection />
-      <ClosingCta />
+      <ClosingCta quoteCtaHref="#quote" />
     </>
   );
 }
