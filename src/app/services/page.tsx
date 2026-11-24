@@ -6,6 +6,7 @@ import { PageHero } from "@/components/layout/PageHero";
 import { pageHeroImages } from "@/config/page-heroes";
 import { Reveal } from "@/components/motion/Reveal";
 import { FaqAccordion } from "@/components/home/FaqAccordion";
+import { SecuritySystemsSection } from "@/components/services/SecuritySystemsSection";
 import { services } from "@/data/site";
 import { contactQuoteHref } from "@/config/navigation";
 import { business, whatsappLink } from "@/config/business";
@@ -13,7 +14,7 @@ import { business, whatsappLink } from "@/config/business";
 export const metadata: Metadata = {
   title: "CCTV Services — Installation, Supply, Repair & AMC in Hyderabad",
   description:
-    "CCTV installation, product supply, repair, system upgrades and AMC maintenance across Hyderabad. Surveyed, installed and supported by one team.",
+    "CCTV installation, supply, repair, AMC, biometric, access control, fire alarm, smoke sensors and panic systems across Hyderabad and Secunderabad.",
 };
 
 export default function ServicesPage() {
@@ -23,7 +24,7 @@ export default function ServicesPage() {
         eyebrow="Services"
         title="One team for"
         titleMuted="the whole lifecycle."
-        description="Supply, installation, repair, upgrades and maintenance — handled by the same people, so nothing falls between vendors."
+        description="CCTV lifecycle services plus biometric, access control, fire alarm, smoke sensors and panic systems — supplied, installed and supported in Hyderabad."
         image={pageHeroImages.services.src}
         imageFocus={pageHeroImages.services.focus}
       >
@@ -135,6 +136,8 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      <SecuritySystemsSection />
 
       {/* --- FAQs --------------------------------------------------------- */}
       <FaqAccordion />

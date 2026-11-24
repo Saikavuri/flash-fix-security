@@ -28,6 +28,11 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
       { label: "Repair & Troubleshooting", href: "/services#repair" },
       { label: "System Upgrades", href: "/services#upgrades" },
       { label: "AMC & Maintenance", href: "/services#maintenance" },
+      { label: "Biometric", href: "/services#biometric" },
+      { label: "Access Control", href: "/services#access-control" },
+      { label: "Fire Alarm", href: "/services#fire-alarm" },
+      { label: "Smoke Sensors", href: "/services#smoke-sensors" },
+      { label: "Panic Switch", href: "/services#panic-switch" },
     ],
   },
   {

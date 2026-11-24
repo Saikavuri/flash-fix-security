@@ -12,6 +12,11 @@ import {
   HardDrive,
   Radio,
   Sun,
+  Fingerprint,
+  DoorOpen,
+  Flame,
+  CloudFog,
+  BellRing,
 } from "lucide-react";
 
 /* ==========================================================================
@@ -136,6 +141,72 @@ export const services: Service[] = [
       "Priority response under AMC terms",
     ],
     whatsappContext: "I'd like to discuss an AMC / maintenance plan",
+  },
+];
+
+/* ==========================================================================
+   Security systems (supply & installation — from full security portfolio)
+   ========================================================================== */
+
+export type SecuritySystem = {
+  id: string;
+  title: string;
+  summary: string;
+  points: string[];
+  icon: LucideIcon;
+  /** Optional in-page anchor target on /services */
+  href?: string;
+};
+
+export const securitySystems: SecuritySystem[] = [
+  {
+    id: "cctv-security",
+    title: "CCTV Security",
+    summary:
+      "Dome, bullet, IP, wireless, solar and PTZ cameras with recorders — surveyed, installed and supported by one team.",
+    points: ["Indoor and outdoor coverage", "Mobile viewing and playback", "Repair and AMC available"],
+    icon: Camera,
+    href: "/products",
+  },
+  {
+    id: "biometric",
+    title: "Biometric Solutions",
+    summary:
+      "Fingerprint and face attendance / door terminals for offices, shops and restricted areas — enrollment and reporting set up for you.",
+    points: ["Attendance and access logs", "Standalone or network units", "User enrollment on site"],
+    icon: Fingerprint,
+  },
+  {
+    id: "access-control",
+    title: "Access Control",
+    summary:
+      "Card, PIN and controller-based entry for doors, boom barriers and lifts — wired to match your traffic flow.",
+    points: ["Door controllers and readers", "Boom barriers and magnetic locks", "Time-zone and holiday rules"],
+    icon: DoorOpen,
+  },
+  {
+    id: "fire-alarm",
+    title: "Fire Alarm Systems",
+    summary:
+      "Conventional and addressable fire panels with sounders and call points — laid out to your floor plan and tested on handover.",
+    points: ["Panels, detectors and MCPs", "Hooter / strobe notification", "Compliance-focused layout advice"],
+    icon: Flame,
+  },
+  {
+    id: "smoke-sensors",
+    title: "Smoke Sensors",
+    summary:
+      "Optical and multi-sensor smoke detectors for homes, kitchens, offices and warehouses — standalone or linked to a panel.",
+    points: ["Ceiling and duct sensors", "Low-battery and fault alerts", "Linked or standalone options"],
+    icon: CloudFog,
+  },
+  {
+    id: "panic-switch",
+    title: "Panic Switch",
+    summary:
+      "Fixed and wireless panic buttons for cash counters, reception and guard posts — wired to sirens, panels or monitoring paths you choose.",
+    points: ["Under-desk and wall mount", "Wireless fob options", "Siren or panel integration"],
+    icon: BellRing,
   },
 ];
 
@@ -588,7 +659,7 @@ export const faqs = [
   {
     question: "Which areas of Hyderabad do you service?",
     answer:
-      "We cover Hyderabad and the surrounding region. Send us your location through the enquiry form or WhatsApp and we will confirm coverage and arrange a visit.",
+      "We cover all neighbourhoods across Hyderabad, Secunderabad and the wider city limits — Kondapur, Gachibowli, HITEC City and beyond. Send your location through the enquiry form or WhatsApp and we will confirm and schedule a visit.",
   },
 ];
 

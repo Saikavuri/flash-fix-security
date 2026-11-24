@@ -122,7 +122,13 @@ export function Footer() {
           <h2 className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/35">
             Hyderabad service areas
           </h2>
+          <p className="mt-4 max-w-2xl text-[13px] leading-relaxed text-white/45">
+            {business.serviceAreasNote}
+          </p>
           <ul className="mt-4 flex flex-wrap gap-x-2 gap-y-2">
+            <li className="rounded-full border border-electric-500/35 bg-electric-500/10 px-3 py-1.5 text-[12.5px] font-medium text-electric-200/90">
+              {business.serviceAreasBadge}
+            </li>
             {business.serviceAreas.map((area) => (
               <li
                 key={area}

@@ -57,19 +57,37 @@ export const business = {
   ],
 
   /**
-   * Verified Hyderabad service areas.
-   * These appear in the footer and on the contact page.
+   * Hyderabad localities we highlight on the site (regular visit hubs).
+   * Coverage is city-wide — see `serviceAreasNote`.
    */
   serviceAreas: [
     "Kondapur",
     "Gachibowli",
     "Madhapur",
     "HITEC City",
+    "Financial District",
+    "Nanakramguda",
     "Miyapur",
     "Kukatpally",
+    "Chandanagar",
+    "Bachupally",
+    "Manikonda",
+    "Tellapur",
     "Banjara Hills",
     "Jubilee Hills",
+    "Ameerpet",
+    "Secunderabad",
+    "LB Nagar",
+    "Uppal",
+    "Kompally",
   ],
+
+  /** Shown under the area chips on contact and footer. */
+  serviceAreasNote:
+    "We cover all neighbourhoods across Hyderabad, Secunderabad and the wider city limits. Tell us your location — we'll confirm and schedule a visit.",
+
+  /** Highlight chip — full-city coverage. */
+  serviceAreasBadge: "All areas across Hyderabad & nearby",
 
   /** Google Maps link for the "Get directions" action */
   mapsUrl:

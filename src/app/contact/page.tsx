@@ -187,10 +187,12 @@ export default function ContactPage() {
               Hyderabad service areas
             </h2>
             <p className="mt-3 max-w-xl text-[15.5px] text-ink-600">
-              We cover {business.city} and the surrounding region. If your area is not
-              listed, message us — we will confirm coverage.
+              {business.serviceAreasNote}
             </p>
             <ul className="mt-8 flex flex-wrap gap-2">
+              <li className="rounded-full border border-electric-500/30 bg-electric-500/8 px-4 py-2 text-[13.5px] font-medium text-electric-700">
+                {business.serviceAreasBadge}
+              </li>
               {business.serviceAreas.map((area) => (
                 <li
                   key={area}
