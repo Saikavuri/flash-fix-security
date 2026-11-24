@@ -11,6 +11,7 @@ import {
   Monitor,
   HardDrive,
   Radio,
+  Sun,
 } from "lucide-react";
 
 /* ==========================================================================
@@ -69,7 +70,7 @@ export const services: Service[] = [
     imageFocus: "48% 50%",
     icon: Package,
     highlights: [
-      "Dome, bullet, IP, wireless and PTZ ranges",
+      "Dome, bullet, IP, wireless, solar and PTZ ranges",
       "DVR and NVR systems with accessories",
       "Guidance on channel count and storage",
     ],
@@ -84,9 +85,10 @@ export const services: Service[] = [
       "Diagnostics and repair for cameras, recorders and cabling — including systems installed by other vendors.",
     description:
       "No footage, distorted image, dropped recording, storage failure or a camera offline: we diagnose the fault, replace failed components and re-tune the system so it records reliably again. We service third-party installations too.",
-    image: "/images/services/repair.jpg",
-    imageAlt: "Close-up of a technician servicing a camera wiring loom",
-    imageFocus: "55% 45%",
+    image: "/images/services/repair-cctv.jpg",
+    imageAlt:
+      "Technician testing a dome CCTV camera connected to a DVR and monitor on a workbench",
+    imageFocus: "48% 50%",
     icon: LifeBuoy,
     highlights: [
       "On-site diagnosis of camera and recorder faults",
@@ -150,7 +152,7 @@ export const servicePillars = [
   {
     icon: Camera,
     title: "Every Camera Type",
-    copy: "Dome, bullet, IP, wireless and PTZ, matched to the location.",
+    copy: "Dome, bullet, IP, wireless, solar and PTZ, matched to the location.",
   },
   {
     icon: Headset,
@@ -179,6 +181,7 @@ export type ProductCategory =
   | "cameras"
   | "ip"
   | "wireless"
+  | "solar"
   | "ptz"
   | "recorder";
 
@@ -190,6 +193,7 @@ export const productCategories: {
   { id: "cameras", label: "Dome & Bullet" },
   { id: "ip", label: "IP / Network" },
   { id: "wireless", label: "Wireless" },
+  { id: "solar", label: "Solar" },
   { id: "ptz", label: "PTZ" },
 ];
 
@@ -241,6 +245,18 @@ export const products: Product[] = [
     imageAlt: "Compact wireless security camera on a shelf",
     imageFocus: "50% 42%",
     icon: Radio,
+  },
+  {
+    id: "solar-camera",
+    name: "Solar Cameras",
+    category: "solar",
+    tagline: "Power where cabling can't reach",
+    description:
+      "Self-powered bullet and PTZ-style units with built-in solar panels and battery backup — ideal for farm plots, compound walls, gates and yards with no nearby mains.",
+    image: "/images/products/solar.jpg",
+    imageAlt: "Solar-powered CCTV camera with integrated panel on an outdoor pole",
+    imageFocus: "50% 45%",
+    icon: Sun,
   },
   {
     id: "ptz-camera",

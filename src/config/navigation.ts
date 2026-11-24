@@ -37,6 +37,7 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
       { label: "Bullet Cameras", href: "/products#bullet-camera" },
       { label: "IP Cameras", href: "/products#ip-camera" },
       { label: "Wireless Cameras", href: "/products#wireless-camera" },
+      { label: "Solar Cameras", href: "/products#solar-camera" },
       { label: "PTZ Cameras", href: "/products#ptz-camera" },
     ],
   },

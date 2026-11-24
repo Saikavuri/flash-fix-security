@@ -12,7 +12,7 @@ import { whatsappLink } from "@/config/business";
 export const metadata: Metadata = {
   title: "CCTV Cameras — Dome, Bullet, IP & Wireless in Hyderabad",
   description:
-    "Dome, bullet, IP, wireless and PTZ CCTV cameras for Hyderabad. Enquire for pricing — models matched to your site after survey.",
+    "Dome, bullet, IP, wireless, solar and PTZ CCTV cameras for Hyderabad. Enquire for pricing — models matched to your site after survey.",
 };
 
 export default function ProductsPage() {
@@ -22,7 +22,7 @@ export default function ProductsPage() {
         eyebrow="Products"
         title="CCTV cameras"
         titleMuted="that fit the site."
-        description="We supply dome, bullet, IP, wireless and PTZ cameras and help you pick what the property actually needs — no generic kits."
+        description="We supply dome, bullet, IP, wireless, solar and PTZ cameras and help you pick what the property actually needs — no generic kits."
         image={pageHeroImages.products.src}
         imageFocus={pageHeroImages.products.focus}
       >
@@ -64,7 +64,7 @@ export default function ProductsPage() {
             </Link>
           </div>
 
-          <ul className="mt-10 grid gap-px overflow-hidden rounded-lg border border-ink-950/8 bg-ink-950/8 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-10 grid gap-px overflow-hidden rounded-lg border border-ink-950/8 bg-ink-950/8 sm:grid-cols-2 lg:grid-cols-3">
             {cctvCameras.map((product) => (
               <li key={product.id}>
                 <Link

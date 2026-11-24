@@ -81,9 +81,9 @@ export function Header() {
             >
               <Logo
                 withWordmark
-                name={business.name}
                 tagline={business.tagline}
                 tone={solid ? "dark" : "light"}
+                size={solid ? 46 : 52}
                 className="gap-3"
               />
             </Link>

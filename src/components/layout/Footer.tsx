@@ -20,12 +20,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-4 lg:pr-10">
             <Link href="/" className="flex items-center gap-3" aria-label={`${business.name} — home`}>
-              <Logo
-                withWordmark
-                name={business.name}
-                tagline={business.tagline}
-                tone="light"
-              />
+              <Logo withWordmark tagline={business.tagline} tone="light" size={52} />
             </Link>
 
             <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-white/55">

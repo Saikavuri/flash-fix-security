@@ -7,11 +7,18 @@ import { ArrowRight, MessageCircle } from "lucide-react";
 import { cctvCameras } from "@/data/site";
 import { business, whatsappLink } from "@/config/business";
 import { useReveal } from "@/components/motion/useReveal";
+import { cn } from "@/lib/utils";
 
 /**
- * Homepage CCTV camera strip — four representative body styles; full lineup on /products.
+ * Homepage CCTV camera strip — representative body styles; full lineup on /products.
  */
-const FEATURED = ["dome-camera", "bullet-camera", "ip-camera", "wireless-camera"];
+const FEATURED = [
+  "dome-camera",
+  "bullet-camera",
+  "ip-camera",
+  "wireless-camera",
+  "solar-camera",
+];
 
 export function ProductsCondensed() {
   const reveal = useReveal();
@@ -45,13 +52,13 @@ export function ProductsCondensed() {
             className="lede lg:col-span-5 lg:pb-2"
             {...reveal({ opacity: 0, y: 20 }, { opacity: 1, y: 0 }, { delay: 0.14, duration: 0.7 })}
           >
-            We supply dome, bullet, IP, wireless and PTZ CCTV cameras — spec and
-            pricing confirmed when we quote for your property.
+            We supply dome, bullet, IP, wireless, solar and PTZ CCTV cameras — spec
+            and pricing confirmed when we quote for your property.
           </motion.p>
         </div>
 
         {/* --- Grid ----------------------------------------------------- */}
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4 lg:gap-5">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:mt-20 lg:grid-cols-6 lg:gap-5">
           {featured.map((product, i) => {
             const focus = product.imageFocus ?? "50% 50%";
             const cardIndex = String(i + 1).padStart(2, "0");
@@ -63,13 +70,17 @@ export function ProductsCondensed() {
                 {...reveal(
                   { opacity: 0, y: 24 },
                   { opacity: 1, y: 0 },
-                  { delay: (i % 4) * 0.07, duration: 0.7 }
+                  { delay: (i % 5) * 0.07, duration: 0.7 }
                 )}
-                className="group flex flex-col overflow-hidden rounded-xl border border-ink-950/8 bg-white shadow-[0_1px_0_rgba(7,9,14,0.04)] transition-all duration-500 hover:border-electric-500/20 hover:shadow-lift-lg"
+                className={cn(
+                  "group flex h-full flex-col overflow-hidden rounded-xl border border-ink-950/8 bg-white shadow-[0_1px_0_rgba(7,9,14,0.04)] transition-all duration-500 hover:border-electric-500/20 hover:shadow-lift-lg sm:col-span-1 lg:col-span-2",
+                  i === 3 && "lg:col-start-2",
+                  i === 4 && "lg:col-start-4"
+                )}
               >
                 <Link
                   href="/products"
-                  className="relative block outline-none focus-visible:ring-2 focus-visible:ring-electric-500 focus-visible:ring-offset-2"
+                  className="relative block shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-electric-500 focus-visible:ring-offset-2"
                 >
                   <div className="media aspect-[4/3] w-full rounded-none bg-ink-900">
                     <Image
@@ -77,7 +88,7 @@ export function ProductsCondensed() {
                       alt={product.imageAlt}
                       fill
                       quality={84}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="size-full object-cover transition-transform duration-[1000ms] ease-out-expo group-hover:scale-[1.06]"
                       style={{ objectPosition: focus }}
                     />
@@ -109,7 +120,7 @@ export function ProductsCondensed() {
                   >
                     {product.name}
                   </Link>
-                  <p className="mt-2.5 flex-1 text-[14.5px] leading-relaxed text-ink-600">
+                  <p className="mt-2.5 flex-1 text-[14px] leading-relaxed text-ink-600 line-clamp-4">
                     {product.description}
                   </p>
 
